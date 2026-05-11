@@ -1,6 +1,28 @@
 {
   "name": "koo-superdev",
   "version": "1.0.0",
+  "description": "🚀 Premium Agentic AI CLI with community packs, agent profiles, and interactive slash commands",
+  "author": "KOO Superdev Team",
+  "license": "MIT",
+  "homepage": "https://github.com/koo/koo-superdev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koo/koo-superdev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/koo/koo-superdev/issues"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "cli",
+    "assistant",
+    "agentic",
+    "superdev",
+    "typescript",
+    "openrouter",
+    "anthropic"
+  ],
   "type": "module",
   "bin": {
     "koo": "./dist/koo.js",
