@@ -35,6 +35,7 @@
   "scripts": {
     "start": "npx ts-node --esm koo.ts",
     "build": "tsc",
+    "postbuild": "chmod +x dist/koo.js dist/koo-cli.js dist/koo-tui.js",
     "watch": "tsc --watch",
     "test": "bash scripts/test.sh",
     "setup": "bash scripts/setup.sh",
