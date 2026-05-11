@@ -106,7 +106,7 @@ node dist/koo-cli.js
 
 ### For Global Installation
 ```bash
-npm install -g @mapii.cloud/superdev
+npm install -g @koo/superdev
 koo --help
 ```
 
