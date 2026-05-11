@@ -1,7 +1,7 @@
-# 🎉 KOO Superdev v1.0.0 - Release Status Report
+# 🎉 KOO Superdev v1.0.1 - Release Status Report
 
-**Release Date:** May 11, 2024  
-**Version:** 1.0.0 (Initial Release)  
+**Release Date:** May 11, 2026  
+**Version:** 1.0.1 (Scope and publish alignment)  
 **Status:** ✅ PRODUCTION READY
 
 ---
@@ -106,7 +106,7 @@ node dist/koo-cli.js
 
 ### For Global Installation
 ```bash
-npm install -g @koo/superdev
+npm install -g @mapii.cloud/superdev
 koo --help
 ```
 
@@ -160,7 +160,7 @@ All source files included for containerization:
 - ✅ GitHub templates set up
 - ✅ CI/CD pipeline working
 - ✅ Git history clean
-- ✅ Version tagged (v1.0.0)
+- ✅ Version tagged (v1.0.1)
 - ✅ Commit messages clear
 - ✅ Code of Conduct established
 - ✅ Contributing guidelines ready
@@ -206,7 +206,7 @@ git push origin main --tags
 
 ## ✨ Final Notes
 
-**KOO Superdev v1.0.0 is ready for:**
+**KOO Superdev v1.0.1 is ready for:**
 - ✅ Production deployment
 - ✅ npm registry publication
 - ✅ Community collaboration
@@ -225,7 +225,7 @@ git push origin main --tags
 
 <div align="center">
 
-**🎉 KOO Superdev v1.0.0 - Ready for World! 🌍**
+**🎉 KOO Superdev v1.0.1 - Ready for World! 🌍**
 
 *Built with ❤️ | Protected by MIT License | Safe for Everyone*
 

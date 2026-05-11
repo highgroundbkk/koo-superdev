@@ -12,21 +12,12 @@
 
 </div>
 
----
 
 ## ✨ Features
 
 ### 🎨 Premium CLI Experience
-- **Animated colorful banner** with branding
-- **Agent profiles** with diverse personas
-- **Community packs** for specialized workflows
-- **Slash command system** for interactive workflows
-- **Session persistence** across sessions
 
 ### 🧠 Agent Presets
-- **KOO-AGENT4.1**: Default all-purpose agent
-- **KOO-SHARP 4.1**: Focused, concise execution
-- **KOO-BUILDER 4.1**: Construction and setup focused
 
 ### 📦 Community Packs
 Install specialized packs for specific workflows:
@@ -56,22 +47,23 @@ Install specialized packs for specific workflows:
 ```
 
 ### 🔐 Security & Privacy
+
 - ✅ No hardcoded secrets
 - ✅ Opt-in community packs
 - ✅ Local session storage
 - ✅ Environment-based configuration
 - ✅ No data sent to third parties
 
----
 
 ## 🚀 Quick Start
 
 ### Package Name (Scoped)
 
-- npm package: **@koo/superdev**
-- install command: `npm i -g @koo/superdev`
+- npm package: **@mapii.cloud/superdev**
+- install command: `npm i -g @mapii.cloud/superdev`
 - executable: `koo`
-- release tag: `v1.0.0`
+- release tag: `v1.0.1`
+
 
 ### One-Line Setup (Recommended)
 
@@ -104,7 +96,6 @@ node dist/koo-cli.js
 
 See [INSTALL.md](./INSTALL.md) for detailed setup instructions.
 
----
 
 ## 📖 Usage
 
@@ -148,7 +139,6 @@ node dist/koo-cli.js
 node dist/koo-tui.js
 ```
 
----
 
 ## 🛠️ Configuration
 
@@ -205,7 +195,6 @@ Manage packs with `/refine` command:
 /refine add safe fast deep
 ```
 
----
 
 ## 📚 API Reference
 
@@ -229,7 +218,6 @@ Agent profiles and community pack definitions.
 #### `src/shell.ts`
 Shell command execution and utilities.
 
----
 
 ## 🔧 Development
 
@@ -285,7 +273,6 @@ koo-superdev/
 └── tsconfig.json             # TypeScript config
 ```
 
----
 
 ## 🐛 Troubleshooting
 
@@ -320,7 +307,6 @@ chmod +x scripts/*.sh
 
 See [INSTALL.md](./INSTALL.md) for more troubleshooting.
 
----
 
 ## 📦 Getting API Keys
 
@@ -339,17 +325,11 @@ See [INSTALL.md](./INSTALL.md) for more troubleshooting.
 2. Create an API key
 3. Copy to `.env`
 
----
 
 ## 🤝 Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on:
 
-- Adding features
-- Fixing bugs
-- Improving documentation
-- Creating community packs
-- Reporting issues
 
 ### Quick Contribution Steps
 
@@ -360,32 +340,20 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guideline
 5. Commit: `git commit -m "feat: my new feature"`
 6. Push and create pull request
 
----
 
 ## 📄 License
 
 MIT License - See [LICENSE](./LICENSE) for details.
 
----
 
 ## 🙏 Acknowledgments
 
 Built with:
-- **TypeScript** - Type safety
-- **Node.js** - Runtime
-- **OpenRouter** - Multi-model access
-- **Anthropic** - Claude models
 
----
 
 ## 💬 Support & Feedback
 
-- 📖 **Documentation**: [INSTALL.md](./INSTALL.md) | [CONTRIBUTING.md](./CONTRIBUTING.md)
-- 🐛 **Issues**: [Report a bug](https://github.com/koo/koo-superdev/issues)
-- 💡 **Ideas**: [Request a feature](https://github.com/koo/koo-superdev/discussions)
-- 💬 **Discussions**: [Join the community](https://github.com/koo/koo-superdev/discussions)
 
----
 
 <div align="center">
 
