@@ -106,13 +106,13 @@ node dist/koo-cli.js
 
 ### For Global Installation
 ```bash
-npm install -g koo-superdev
+npm install -g @mapii.cloud/superdev
 koo --help
 ```
 
 ### For npm Publishing
 ```bash
-npm publish
+npm publish --access public
 ```
 
 ### For Docker/Container
@@ -172,9 +172,9 @@ All source files included for containerization:
 
 ### Publishing
 ```bash
-npm publish
+npm publish --access public
 # or
-npm publish --registry https://registry.npmjs.org/
+npm publish --access public --registry https://registry.npmjs.org/
 ```
 
 ### GitHub

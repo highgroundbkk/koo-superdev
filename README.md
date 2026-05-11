@@ -68,8 +68,8 @@ Install specialized packs for specific workflows:
 
 ### Package Name (Scoped)
 
-- npm package: **@koo/superdev**
-- install command: `npm i -g @koo/superdev`
+- npm package: **@mapii.cloud/superdev**
+- install command: `npm i -g @mapii.cloud/superdev`
 - executable: `koo`
 - release tag: `v1.0.0`
 
