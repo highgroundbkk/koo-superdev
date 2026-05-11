@@ -66,6 +66,13 @@ Install specialized packs for specific workflows:
 
 ## 🚀 Quick Start
 
+### Package Name (Scoped)
+
+- npm package: **@koo/superdev**
+- install command: `npm i -g @koo/superdev`
+- executable: `koo`
+- release tag: `v1.0.0`
+
 ### One-Line Setup (Recommended)
 
 ```bash

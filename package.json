@@ -1,5 +1,5 @@
 {
-  "name": "koo-superdev",
+  "name": "@koo/superdev",
   "version": "1.0.0",
   "description": "🚀 Premium Agentic AI CLI with community packs, agent profiles, and interactive slash commands",
   "author": "KOO Superdev Team",
@@ -24,6 +24,9 @@
     "anthropic"
   ],
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "koo": "./dist/koo.js",
     "koo-tui": "./dist/koo-tui.js",
