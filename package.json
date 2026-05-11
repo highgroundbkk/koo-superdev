@@ -7,7 +7,7 @@
   "homepage": "https://github.com/koo/koo-superdev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/koo/koo-superdev.git"
+    "url": "git+https://github.com/koo/koo-superdev.git"
   },
   "bugs": {
     "url": "https://github.com/koo/koo-superdev/issues"
@@ -28,9 +28,9 @@
     "access": "public"
   },
   "bin": {
-    "koo": "./dist/koo.js",
-    "koo-tui": "./dist/koo-tui.js",
-    "koo-cli": "./dist/koo-cli.js"
+    "koo": "dist/koo.js",
+    "koo-tui": "dist/koo-tui.js",
+    "koo-cli": "dist/koo-cli.js"
   },
   "scripts": {
     "start": "npx ts-node --esm koo.ts",
