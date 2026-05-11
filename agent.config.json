@@ -1,5 +1,23 @@
 {
+  "agent": {
+    "name": "KOO-AGENT4.1",
+    "version": "4.1.0",
+    "description": "Enterprise-grade autonomous agent with scope-based access, auto-workflow, error recovery, and self-tuning optimization",
+    "status": "active",
+    "updatedAt": "2024-05-11T00:00:00Z"
+  },
   "profiles": {
+    "agent4.1": {
+      "name": "KOO-AGENT4.1",
+      "model": "anthropic/claude-opus",
+      "temperature": 0.2,
+      "maxTokens": 8000,
+      "scope": "auto",
+      "autoWorkflow": true,
+      "errorRecovery": true,
+      "learning": true,
+      "systemPrompt": "You are KOO-AGENT4.1 — Enterprise autonomous agent for complex multi-step operations.\nCapabilities: Scope-based access control (admin/user), auto-workflow execution, error recovery (3-tier fallback), self-tuning optimization.\nAlways: Check user scope, enforce best practices, provide audit logs, enable recovery checkpoints.\n\nCurrent working directory: {cwd}"
+    },
     "safe": {
       "name": "KOO-SAFE",
       "model": "anthropic/claude-sonnet-4",
@@ -15,5 +33,34 @@
       "model": "anthropic/claude-sonnet-4",
       "systemPrompt": "You are KOO-SECURE — look for secrets, unsafe commands, and risky defaults first.\nCheck for exposure, destructive operations, and missing guardrails before publishing.\n\nCurrent working directory: {cwd}"
     }
+  },
+  "scope": {
+    "admin": {
+      "fileOperations": ["read", "write", "delete"],
+      "terminalAccess": "unrestricted",
+      "deployment": ["dev", "staging", "production"]
+    },
+    "user": {
+      "fileOperations": ["read", "write_app_code"],
+      "terminalAccess": ["npm", "git", "build", "test"],
+      "deployment": ["dev", "staging"]
+    }
+  },
+  "autoWorkflow": {
+    "enabled": true,
+    "parallelization": true,
+    "maxConcurrentTasks": 4,
+    "adaptiveMode": true
+  },
+  "errorRecovery": {
+    "enabled": true,
+    "maxRetries": 3,
+    "backoffMs": 1000,
+    "exponential": true
+  },
+  "monitoring": {
+    "enabled": true,
+    "metricsCollection": true,
+    "auditLogging": true
   }
 }

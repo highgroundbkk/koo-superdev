@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json.schemastore.org/koo-hooks.schema.json",
+  "hooks": [
+    {
+      "name": "scope-validation",
+      "event": "PreToolUse",
+      "description": "Validate user scope before executing tools",
+      "enabled": true,
+      "condition": "tool in ['run_in_terminal', 'replace_string_in_file', 'create_file']",
+      "action": {
+        "type": "validate",
+        "check": "validateUserScope",
+        "onFailure": "block",
+        "message": "❌ Operation requires {{required_scope}} scope. Current scope: {{current_scope}}"
+      }
+    },
+    {
+      "name": "production-deployment-approval",
+      "event": "PreToolUse",
+      "description": "Require approval for production deployments",
+      "enabled": true,
+      "condition": "tool == 'run_in_terminal' && args contains 'production' || args contains 'prod'",
+      "action": {
+        "type": "approval",
+        "requiredScope": "admin",
+        "message": "🔒 Production deployment detected. Admin approval required.",
+        "timeout": 300
+      }
+    },
+    {
+      "name": "security-operation-audit",
+      "event": "PostToolUse",
+      "description": "Log all security-related operations",
+      "enabled": true,
+      "condition": "tool in ['replace_string_in_file'] && file matches '(SECURITY|.env|.secrets|key|credentials)'",
+      "action": {
+        "type": "log",
+        "level": "security",
+        "fields": ["tool", "user", "scope", "file", "timestamp", "changes"]
+      }
+    },
+    {
+      "name": "auto-fix-code-style",
+      "event": "PostToolUse",
+      "description": "Auto-format code after creation",
+      "enabled": true,
+      "condition": "tool == 'create_file' && file ends with '.ts' || file ends with '.js'",
+      "action": {
+        "type": "command",
+        "command": "npx prettier --write {{file}}",
+        "onError": "warn"
+      }
+    },
+    {
+      "name": "prevent-secrets-commit",
+      "event": "PreToolUse",
+      "description": "Block commits containing secrets patterns",
+      "enabled": true,
+      "condition": "tool == 'run_in_terminal' && args contains 'git commit'",
+      "action": {
+        "type": "scan",
+        "patterns": [
+          "process.env\\..*KEY|TOKEN|SECRET|PASSWORD",
+          "sk_live_|rk_live_|pk_live_",
+          "AKIA[0-9A-Z]{16}",
+          "(?i)(password|passwd|pwd|secret|token|api_key|apikey|access_key)\\s*[:=]"
+        ],
+        "onFailure": "block",
+        "message": "🔒 Potential secrets detected in commit message. Use environment variables instead."
+      }
+    },
+    {
+      "name": "test-coverage-check",
+      "event": "PostToolUse",
+      "description": "Validate test coverage after code changes",
+      "enabled": true,
+      "condition": "tool == 'replace_string_in_file' && file matches 'src/**/*.ts'",
+      "action": {
+        "type": "command",
+        "command": "npm run test -- --coverage --testPathPattern={{file}}",
+        "onError": "warn",
+        "message": "⚠️ Run tests to validate coverage for changed files"
+      }
+    },
+    {
+      "name": "performance-budget-check",
+      "event": "PostToolUse",
+      "description": "Check bundle size after build",
+      "enabled": true,
+      "condition": "tool == 'run_in_terminal' && args contains 'npm run build'",
+      "action": {
+        "type": "command",
+        "command": "npm run build && size-limit",
+        "onError": "warn",
+        "message": "📊 Bundle size: Check size-limit output"
+      }
+    },
+    {
+      "name": "git-pre-push-validation",
+      "event": "PreToolUse",
+      "description": "Validate branch and commit before git push",
+      "enabled": true,
+      "condition": "tool == 'run_in_terminal' && args contains 'git push'",
+      "checks": [
+        {
+          "name": "prevent-main-force-push",
+          "condition": "args contains '-f' || args contains '--force'",
+          "onFailure": "block",
+          "message": "❌ Force push to main/master blocked for safety"
+        },
+        {
+          "name": "require-feature-branch",
+          "condition": "currentBranch == 'main' || currentBranch == 'master'",
+          "scope": "user",
+          "onFailure": "block",
+          "message": "❌ Direct push to main requires admin scope"
+        }
+      ]
+    },
+    {
+      "name": "checkpoint-before-risky-op",
+      "event": "PreToolUse",
+      "description": "Create checkpoint before potentially destructive operations",
+      "enabled": true,
+      "condition": "tool == 'run_in_terminal' && args matches '(rm -rf|DROP TABLE|git reset --hard|kubectl delete)'",
+      "action": {
+        "type": "checkpoint",
+        "name": "pre-{{operation}}-{{timestamp}}",
+        "message": "📍 Checkpoint created before: {{operation}}"
+      }
+    },
+    {
+      "name": "auto-dependency-audit",
+      "event": "PostToolUse",
+      "description": "Run npm audit after package.json changes",
+      "enabled": true,
+      "condition": "tool == 'replace_string_in_file' && file == 'package.json'",
+      "action": {
+        "type": "command",
+        "command": "npm audit --audit-level=moderate",
+        "onError": "warn",
+        "message": "🔒 Run 'npm audit fix' to resolve vulnerabilities"
+      }
+    },
+    {
+      "name": "enforce-commit-message-format",
+      "event": "PreToolUse",
+      "description": "Validate conventional commit format",
+      "enabled": true,
+      "condition": "tool == 'run_in_terminal' && args contains 'git commit -m'",
+      "action": {
+        "type": "validate",
+        "pattern": "^(feat|fix|docs|style|refactor|perf|test|chore)(:|(\\(.*\\):)) .+",
+        "onFailure": "block",
+        "message": "❌ Commit message must follow conventional commits: type(scope): description"
+      }
+    },
+    {
+      "name": "scope-escalation-logging",
+      "event": "PostToolUse",
+      "description": "Log scope escalation requests",
+      "enabled": true,
+      "condition": "result contains 'escalat' || result contains 'admin access'",
+      "action": {
+        "type": "log",
+        "level": "info",
+        "message": "📝 Scope escalation request logged",
+        "fields": ["timestamp", "user", "reason", "requested_scope"]
+      }
+    },
+    {
+      "name": "auto-workflow-activation-log",
+      "event": "PostToolUse",
+      "description": "Log when auto-workflow mode activates",
+      "enabled": true,
+      "condition": "autoWorkflowActivated == true",
+      "action": {
+        "type": "log",
+        "level": "info",
+        "message": "🚀 Auto-workflow activated",
+        "fields": ["mode", "steps", "estimatedTime", "parallelization"]
+      }
+    }
+  ],
+  "globalConfig": {
+    "auditLogging": true,
+    "scopeEnforcement": "strict",
+    "approvalRequired": {
+      "production": true,
+      "security": true,
+      "infrastructure": true
+    },
+    "checkpoint": {
+      "enabled": true,
+      "beforeRiskyOps": true
+    }
+  }
+}
